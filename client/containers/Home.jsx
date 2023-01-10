@@ -22,19 +22,30 @@ const Home = ({ user }) => {
 
   }
 
+  const deleteWeights = () => {
+
+  }
+
+  const updateWeight = () => {
+
+  }
+
+  const today = new Date();
+
   return (
     <div id="Home">
       <h1>Welcome, {user.displayName}</h1>
       <form className="row">
         <label htmlFor="date">Date:</label>
         <input 
+          defaultValue={today.toISOString().substring(0,10)}
           name="date" 
           id="date" 
           type="date" 
         />
         <label htmlFor="weight">Weight:</label>
         <input 
-          value={weight}
+          defaultValue={weight}
           name="weight" 
           id="weight" 
           type="number" 
