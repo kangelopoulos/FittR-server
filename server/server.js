@@ -1,6 +1,8 @@
 const PORT = 3000;
 const express = require('express');
 const path = require('path');
+const authRouter = require('./routes/authRouter');
+const weightRouter = require('./routes/weightRouter');
 
 const app = express();
 
@@ -14,7 +16,8 @@ app.use(express.json());
 /**
  * Routes
  */
-
+app.use('/auth', authRouter);
+app.use('/weight', weightRouter);
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, '../build')));
