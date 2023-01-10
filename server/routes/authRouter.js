@@ -19,7 +19,7 @@ router.post('/login', (req, res) => {
  * res.locals - display name (str), username (str)
  */
 router.post('/signup', (req, res) => {
-  return res.send(res.locals);
+  return res.status(200).send(res.locals);
 });
 
 /**

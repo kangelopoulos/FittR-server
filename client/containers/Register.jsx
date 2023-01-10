@@ -21,8 +21,17 @@ const Register = ({ user_id }) => {
       console.log('here');
       setMsg('Please fill out all fields.');
       setErr(true);
+    } else if (confirmPassword !== password) {
+      setMsg('Passwords must match');
+      setErr(true);
     } else { 
-
+      const response = axios.post('/auth/signup', {
+        email: email, 
+        password: password, 
+        confirmPassword: confirmPassword,
+        displayName: displayName
+      });
+      console.log(response);
     }
   }
 
