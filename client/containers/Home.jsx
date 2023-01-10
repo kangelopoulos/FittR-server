@@ -13,8 +13,12 @@ const Home = ({ user }) => {
     setWeights([
       { date: new Date("1/12/22"), weight: 140 },
       { date: new Date("4/12/22"), weight: 146 },
-      { date: new Date("7/12/22"), weight: 135 },
-      { date: new Date("1/10/23"), weight: 130 }
+      { date: new Date("7/12/22"), weight: 148 },
+      { date: new Date("1/1/23"), weight: 145 },
+      { date: new Date("1/2/22"), weight: 140 },
+      { date: new Date("1/3/22"), weight: 138 },
+      { date: new Date("1/5/22"), weight: 136 },
+      { date: new Date("1/6/23"), weight: 132 },
     ])
   }, []);
 
@@ -22,7 +26,11 @@ const Home = ({ user }) => {
 
   }
 
-  const deleteWeights = () => {
+  const deleteWeight = () => {
+
+  }
+
+  const deleteAllWeights = () => {
 
   }
 
@@ -65,7 +73,7 @@ const Home = ({ user }) => {
             <button onClick={e => setIsChart(true)}>See Graph</button>
           </div>
       }
-      <button className="warning">Delete All Data</button>
+      <button className="warning">Delete All Weight Data</button>
     </div>
   )
 }

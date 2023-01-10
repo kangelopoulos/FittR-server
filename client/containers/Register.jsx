@@ -71,7 +71,7 @@ const Register = ({ user }) => {
         />
       </form>
       <button onClick={handleSubmit} type="submit">Submit</button>
-      <Message error={err} message={msg}/>
+      <Message message={msg}/>
     </div>
   )
 }
