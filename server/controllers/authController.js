@@ -4,14 +4,17 @@ const jwt = require('jsonwebtoken');
 
 const authController = {};
 
+/**
+ * Sign up controller
+ */
 authController.signUp = async (req, res, next) => {
   const { email, password, displayName } = req.body;
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(password, salt);
-    const queryStr = `INSERT INTO users(email, password, display_name) VALUES ($1, $2, $3) RETURNING * ;`;
+    const q = `INSERT INTO users(email, password, display_name) VALUES ($1, $2, $3) RETURNING _id;`;
     const values = [email, hashedPass, displayName];
-    const { rows } = await db.query(queryStr, values);
+    const { rows } = await db.query(q, values);
     console.log(rows);
     const user = {
       id: rows[0]._id,
@@ -28,5 +31,32 @@ authController.signUp = async (req, res, next) => {
   }
 }
 
-
+/**
+ * Log in controller 
+ */
+ authController.login = async (req, res, next) => {
+  const { email, password } = req.body;
+  const today = new Date().toDateString();
+  console.log(today);
+  try {
+    const q = `SELECT * FROM users WHERE email = '${email}';`;
+    const { rows } = await db.query(q);
+    if (await bcrypt.compare(password, rows[0].password)) {
+      const user = {
+        id: rows[0]._id,
+        displayName: rows[0].display_name,
+      };
+      res.locals = user;
+      return next();
+    } else {
+      return next({ status: 403 });
+    }
+  } catch (err) {
+    return next({
+      log: `Error in userController.login: ${err}`,
+      status: 500,
+      message: 'Cannot login user right now, sorry!',
+    });
+  }
+};
 module.exports = authController;

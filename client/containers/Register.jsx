@@ -49,7 +49,8 @@ const Register = ({ user_id }) => {
         />
         <label htmlFor="name">Display Name</label>
         <input 
-          onChange={e => setDisplayName(e.target.value)} 
+          onChange={e => setDisplayName(e.target.value)}
+          placeholder="Display Name" 
           type="text" 
           name="name" 
           id="name"
@@ -57,6 +58,7 @@ const Register = ({ user_id }) => {
         <label htmlFor="password">Password</label>
         <input 
           onChange={e => setPassword(e.target.value)} 
+          placeholder="Password" 
           type="password" 
           name="password" 
           id="password" 
@@ -64,6 +66,7 @@ const Register = ({ user_id }) => {
         <label htmlFor="confirm">Confirm Password</label>
         <input 
           onChange={e => setConfirmPassword(e.target.value)} 
+          placeholder="Confirm Password" 
           type="password" 
           name="confirm" 
           id="confirm" 

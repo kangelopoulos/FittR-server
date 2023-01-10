@@ -8,8 +8,10 @@ const authController = require('../controllers/authController');
  * middleware - 
  * res.locals - display name (str), username (str)
  */
-router.post('/login', (req, res) => {
-  return res.send(res.locals);
+router.post('/login', 
+  authController.login,
+  (req, res) => {
+    return res.send(res.locals);
 });
 
 /**
