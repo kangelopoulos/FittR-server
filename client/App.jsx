@@ -9,16 +9,15 @@ import { useState } from "react";
 
 const App = () => {
   const [hasSession, setHasSession] = useState(false);
-  const [userId, setUserId] = useState(0);
-  const [displayName, setDisplayName] = useState('');
-  
+  const [user, setUser] = useState({});
+
   return (
     <div id="main">
       <Nav />
       <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/login' element={<Login />}></Route>
-        <Route path='/register' element={<Register />}></Route>
+        <Route path='/home' element={<Home />}></Route>
+        <Route path='/' element={<Login setUser={setUser} hasSession={hasSession} setHasSession={setHasSession}/>}></Route>
+        <Route path='/register' element={<Register setUser={setUser} hasSession={hasSession}/>}></Route>
       </Routes>
     </div>
   )

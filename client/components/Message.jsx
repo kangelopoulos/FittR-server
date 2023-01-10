@@ -1,9 +1,9 @@
 import React from "react";
 
 
-const Message = ({ message, error }) => {
+const Message = ({ message }) => {
   return (
-    <p className={`error_${error}`}>
+    <p className={`error-msg`}>
       {message}
     </p>
   )

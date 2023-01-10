@@ -36,17 +36,17 @@ authController.signUp = async (req, res, next) => {
  */
  authController.login = async (req, res, next) => {
   const { email, password } = req.body;
-  const today = new Date().toDateString();
-  console.log(today);
   try {
     const q = `SELECT * FROM users WHERE email = '${email}';`;
     const { rows } = await db.query(q);
     if (await bcrypt.compare(password, rows[0].password)) {
+      console.log(rows[0]);
       const user = {
         id: rows[0]._id,
         displayName: rows[0].display_name,
       };
       res.locals = user;
+      console.log(res.locals);
       return next();
     } else {
       return next({ status: 403 });

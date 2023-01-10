@@ -4,7 +4,7 @@ import { useState } from "react";
 import Message from '../components/Message.jsx';
 import axios from "axios";
 
-const Register = ({ user_id }) => {
+const Register = ({ user }) => {
   // Hooks for form
   const [email, setEmail] = useState('');
   const [displayName, setDisplayName] = useState('');
@@ -12,26 +12,24 @@ const Register = ({ user_id }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
 
   // Hooks for error messaging
-  const [err, setErr] = useState(false);
   const [msg, setMsg] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if(!email || !password || !confirmPassword || !displayName){
       console.log('here');
       setMsg('Please fill out all fields.');
-      setErr(true);
     } else if (confirmPassword !== password) {
       setMsg('Passwords must match');
-      setErr(true);
     } else { 
-      const response = axios.post('/auth/signup', {
+      const response = await axios.post('/auth/signup', {
         email: email, 
         password: password, 
         confirmPassword: confirmPassword,
         displayName: displayName
       });
-      console.log(response);
+      console.log(response.data);
+      setMsg('');
     }
   }
 
