@@ -6,6 +6,8 @@ import Chart from "../components/Chart.jsx";
 const Home = ({ user }) => {
   const [weights, setWeights] = useState([]);
   const [isChart, setIsChart] = useState(true);
+  const [date, setDate] = useState({});
+  const [weight, setWeight] = useState(150);
 
   useEffect(() => {
     setWeights([
@@ -16,27 +18,43 @@ const Home = ({ user }) => {
     ])
   }, []);
 
+  const addWeight = () => {
+
+  }
+
   return (
     <div id="Home">
       <h1>Welcome, {user.displayName}</h1>
       <form className="row">
         <label htmlFor="date">Date:</label>
-        <input name="date" id="date" type="date" />
+        <input 
+          name="date" 
+          id="date" 
+          type="date" 
+        />
         <label htmlFor="weight">Weight:</label>
-        <input name="weight" id="weight" type="number" min="10" max="1500"/>
+        <input 
+          value={weight}
+          name="weight" 
+          id="weight" 
+          type="number" 
+          min="10" 
+          max="1500"
+        />
         <button type="submit">Add Weight</button>
       </form>
       {
         isChart ? 
           <div className="row">
             <Chart weights={weights}/>
-            <button>See Table</button>
+            <button onClick={e => setIsChart(false)}>See Table</button>
           </div> :
           <div className="row">
             <Table weights={weights}/>
-            <button>See Graph</button>
+            <button onClick={e => setIsChart(true)}>See Graph</button>
           </div>
       }
+      <button className="warning">Delete All Data</button>
     </div>
   )
 }
