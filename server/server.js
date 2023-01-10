@@ -26,7 +26,13 @@ if (process.env.NODE_ENV === 'production') {
       .status(200)
       .sendFile(path.join(__dirname, '../build/index.html'));
   });
+  app.get('/*', (req, res) => {
+    return res
+      .status(200)
+      .redirect('/');
+  });
 }
+
 
 /**
  * Handle faulty requests
