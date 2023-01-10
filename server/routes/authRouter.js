@@ -15,11 +15,13 @@ router.post('/login', (req, res) => {
 /**
  * Sign up route 
  * req.body - email (str), password (str), display_name (str, optional)
- * middleware -
+ * middleware - authController.signUp
  * res.locals - display name (str), username (str)
  */
-router.post('/signup', (req, res) => {
-  return res.status(200).send(res.locals);
+router.post('/signup', 
+  authController.signUp, 
+  (req, res) => {
+    return res.status(200).send(res.locals);
 });
 
 /**

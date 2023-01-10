@@ -16,8 +16,6 @@ authController.signUp = async (req, res, next) => {
     const user = {
       id: rows[0]._id,
       displayName: rows[0].display_name,
-      lastLogin: rows[0].last_login,
-      email: rows[0].email,
     };
     res.locals = user;
     return next();
