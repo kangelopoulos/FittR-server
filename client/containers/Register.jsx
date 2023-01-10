@@ -1,21 +1,67 @@
+
 import React from "react";
+import { useState } from "react";
+import Message from '../components/Message.jsx';
+import axios from "axios";
 
+const Register = ({ user_id }) => {
+  // Hooks for form
+  const [email, setEmail] = useState('');
+  const [displayName, setDisplayName] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-const Register = () => {
+  // Hooks for error messaging
+  const [err, setErr] = useState(false);
+  const [msg, setMsg] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(!email || !password || !confirmPassword || !displayName){
+      console.log('here');
+      setMsg('Please fill out all fields.');
+      setErr(true);
+    } else { 
+
+    }
+  }
+
   return (
     <div className="mid col auth">
       <h2>Welcome to FittR!</h2>
-      <form className="col auth-form">
-        <label htmlFor="username">Email</label>
-        <input type="email" name="username" id="username" />
+      <form id="register" className="col auth-form">
+        <label htmlFor="email">Email</label>
+        <input 
+          onChange={e => setEmail(e.target.value)} 
+          placeholder="Email"
+          type="email" 
+          name="email" 
+          id="email" 
+        />
         <label htmlFor="name">Display Name</label>
-        <input type="text" name="name" id="name" />
+        <input 
+          onChange={e => setDisplayName(e.target.value)} 
+          type="text" 
+          name="name" 
+          id="name"
+        />
         <label htmlFor="password">Password</label>
-        <input type="password" name="password" id="password" />
+        <input 
+          onChange={e => setPassword(e.target.value)} 
+          type="password" 
+          name="password" 
+          id="password" 
+        />
         <label htmlFor="confirm">Confirm Password</label>
-        <input type="password" name="confirm" id="confirm" />
+        <input 
+          onChange={e => setConfirmPassword(e.target.value)} 
+          type="password" 
+          name="confirm" 
+          id="confirm" 
+        />
       </form>
-      <button type="submit">Submit</button>
+      <button onClick={handleSubmit} type="submit">Submit</button>
+      <Message error={err} message={msg}/>
     </div>
   )
 }
