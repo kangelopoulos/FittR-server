@@ -15,7 +15,7 @@ const App = () => {
     <div id="main">
       <Nav />
       <Routes>
-        <Route path='/home' element={<Home />}></Route>
+        <Route path='/home' element={<Home user={user}/>}></Route>
         <Route path='/' element={<Login setUser={setUser} hasSession={hasSession} setHasSession={setHasSession}/>}></Route>
         <Route path='/register' element={<Register setUser={setUser} hasSession={hasSession}/>}></Route>
       </Routes>
