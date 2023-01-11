@@ -74,10 +74,12 @@ authController.login = async (req, res, next) => {
  * Check for a cookie - if present, return user info 
  */
 authController.authorization = async (req,res,next) => {
+  console.log('in auth');
   if(req.cookies){
     try {
       const token = req.cookies.token;
       if(token){
+        console.log(token);
         const data = jwt.verify(token, process.env.JWT_SECRET);
         const q = `SELECT * FROM users WHERE _id = ${data.id};`;
         const { rows } = await db.query(q);
