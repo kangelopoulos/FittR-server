@@ -19,7 +19,7 @@ router.post("/signup", authController.signUp, (req, res) => {
 /**
  * Route for authorization
  */
-router.get("/cookie", 
+router.post("/cookie", 
   authController.authorization,
   (req, res) => {
     return res.status(200).send(res.locals);
