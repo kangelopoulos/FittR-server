@@ -1,50 +1,40 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const weightController = require('../controllers/weightController');
+const weightController = require("../controllers/weightController");
 
 /**
- * Post weight 
- * req.body - weight (number), user_id (number), date (date)
- * middleware - 
- * res.locals - n/a
+ * Route to post a new weight for a user
  */
-router.post('/', 
-  weightController.postWeight,
-  (req, res) => {
-    return res.send(res.locals);
+router.post("/", weightController.postWeight, (req, res) => {
+  return res.status(200).send(res.locals);
 });
 
 /**
- * Get weights route
- * req.body - user_id (number), year (number)
- * middleware -
- * res.locals - array of objs with keys weight (number), date (date/str), _id (number)
+ * Route to get all weights for a user
  */
-router.get('/', 
-  weightController.getWeights,
-  (req, res) => {
-    return res.send(res.locals);
+router.get("/", weightController.getWeights, (req, res) => {
+  return res.status(200).send(res.locals);
 });
 
 /**
- * Delete weight route
- * req.body - user_id (number), [ weight_ids (numbers) ]
- * middleware -
- * res.locals - n/a
+ * Route to delete a weight for a user
  */
-router.delete('/', (req, res) => {
-  return res.send(res.locals);
+router.delete("/", weightController.deleteWeight, (req, res) => {
+  return res.status(200).send(res.locals);
 });
 
 /**
- * Update weight route
- * req.body - user_id (number), weight_id (number), weight (number)
- * middleware -
- * res.locals - 
+ * Route to delete all weights for a user
  */
-router.patch('/', (req, res) => {
-  return res.send(res.locals);
+router.delete("/all", weightController.deleteAllWeights, (req, res) => {
+  return res.status(200).send(res.locals);
 });
 
+/**
+ * Route to update a weight and date for a user
+ */
+router.patch("/", weightController.updateWeight, (req, res) => {
+  return res.status(200).send(res.locals);
+});
 
 module.exports = router;

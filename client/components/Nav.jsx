@@ -1,17 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
+const Nav = ({ hasSession, setHasSession, setUser }) => {
 
-const Nav = () => {
+  const handleLogout = async () => {
+    setUser({});
+    setHasSession(false);
+    const response = axios.delete('/auth/cookie', {
+      withCredentials: true
+    });
+  };
+
   return (
     <nav>
       <h1>FittR</h1>
       <div className="links">
-        <Link to='/' className="nav-link">Login</Link>
-        <Link to='/register' className="nav-link">Register</Link>
+        {hasSession ? (
+          <Link onClick={handleLogout} to="/" className="nav-link">
+            Logout
+          </Link>
+        ) : (
+          <>
+            <Link to="/" className="nav-link">
+              Login
+            </Link>
+            <Link to="/register" className="nav-link">
+              Register
+            </Link>
+          </>
+        )}
       </div>
     </nav>
-  )
-}
+  );
+};
 
 export default Nav;
