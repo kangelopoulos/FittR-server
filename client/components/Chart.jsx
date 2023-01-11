@@ -29,7 +29,7 @@ ChartJS.register(
  */
 const Chart = ({ weights }) => {
   const initialData = {
-    labels: weights.map(row => `${row.date.getUTCMonth()+1}-${row.date.getUTCDate()}-${row.date.getUTCFullYear()}`),
+    labels: weights.map(row => row.date),
     datasets: [
       {
         label: 'Weights',

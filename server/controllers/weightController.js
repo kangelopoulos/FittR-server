@@ -3,11 +3,16 @@ const weightController = {};
 
 weightController.postWeight = async (req, res, next) => {
   const { weight, user_id, date } = req.body;
+  let formattedWeight;
   try {
+    if(weight - Math.floor(weight) !== 0) formattedWeight = parseFloat(weight).toFixed(2);
+    else formattedWeight = weight;
     const q = `INSERT INTO user_weights(user_id, date, weight) 
-                VALUES($1, $2, $3)`;
-    const vals = [user_id, date, weight.toFixed(2)];
-    const { rows } = await db.query(q, vals)
+                VALUES($1, $2, $3) 
+                RETURNING _id`;
+    const vals = [user_id, date, formattedWeight];
+    const { rows } = await db.query(q, vals);
+    res.locals = { weight_id: rows[0]._id }
     console.log(rows);
     return next();
   } catch (err) {
@@ -19,10 +24,16 @@ weightController.postWeight = async (req, res, next) => {
   }
 };
 
+/**
+ * THIS IS WHERE I LEFT OFF - IM TRYING TO AVERAGE WEIGHTS ON EACH DAY, 
+ * THE BELOW QUERY WILL NOT WORK (OBVIOUSLY)
+ */
 weightController.getWeights = async (req, res, next) => {
   const { user_id } = req.query;
   try {
-    const q = `SELECT _id, date, weight 
+    const q = `SELECT _id, 
+                  to_char(date, 'MM-DD-YYYY') as date, 
+                  AVG(weight) as weight
                 FROM user_weights 
                 WHERE user_id = $1 
                 ORDER BY date`;
@@ -64,7 +75,8 @@ weightController.deleteWeight = async (req, res, next) => {
   const { weight_id } = req.body;
   console.log(weight_id);
   try {
-    const q = `DELETE FROM user_weights WHERE _id = $1 RETURNING *`
+    const q = `DELETE FROM user_weights 
+                WHERE _id = $1`
     const vals = [weight_id];
     const rows = await db.query(q, vals)
     res.locals = rows;
@@ -82,7 +94,8 @@ weightController.deleteWeight = async (req, res, next) => {
 weightController.deleteAllWeights = async (req, res, next) => {
   const { user_id } = req.body;
   try {
-    const q = `DELETE FROM user_weights WHERE user_id = $1`
+    const q = `DELETE FROM user_weights 
+                WHERE user_id = $1`
     const vals = [user_id];
     const { rows } = await db.query(q, vals)
     res.locals = rows;
