@@ -26,7 +26,7 @@ authController.signUp = async (req, res, next) => {
     return next({
       log: `Error in authController.signUp: ${err}`,
       status: 500,
-      message: 'Error on user sign up.',
+      message: 'Sign up failed, please try again.',
     });
   }
 }
@@ -46,16 +46,15 @@ authController.signUp = async (req, res, next) => {
         displayName: rows[0].display_name,
       };
       res.locals = user;
-      console.log(res.locals);
       return next();
     } else {
       return next({ status: 403 });
     }
   } catch (err) {
     return next({
-      log: `Error in userController.login: ${err}`,
+      log: `Error in authController.login: ${err}`,
       status: 500,
-      message: 'Cannot login user right now, sorry!',
+      message: 'Login failed, please try again.',
     });
   }
 };

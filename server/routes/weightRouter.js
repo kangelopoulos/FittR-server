@@ -4,12 +4,14 @@ const weightController = require('../controllers/weightController');
 
 /**
  * Post weight 
- * req.body - weight (number), user_id (number)
+ * req.body - weight (number), user_id (number), date (date)
  * middleware - 
  * res.locals - n/a
  */
- router.post('/', (req, res) => {
-  return res.send(res.locals);
+router.post('/', 
+  weightController.postWeight,
+  (req, res) => {
+    return res.send(res.locals);
 });
 
 /**
@@ -18,8 +20,10 @@ const weightController = require('../controllers/weightController');
  * middleware -
  * res.locals - array of objs with keys weight (number), date (date/str), _id (number)
  */
-router.get('/', (req, res) => {
-  return res.send(res.locals);
+router.get('/', 
+  weightController.getWeights,
+  (req, res) => {
+    return res.send(res.locals);
 });
 
 /**
@@ -28,7 +32,7 @@ router.get('/', (req, res) => {
  * middleware -
  * res.locals - n/a
  */
- router.delete('/', (req, res) => {
+router.delete('/', (req, res) => {
   return res.send(res.locals);
 });
 
@@ -38,7 +42,7 @@ router.get('/', (req, res) => {
  * middleware -
  * res.locals - 
  */
- router.patch('/', (req, res) => {
+router.patch('/', (req, res) => {
   return res.send(res.locals);
 });
 
