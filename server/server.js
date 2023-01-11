@@ -21,21 +21,6 @@ app.use("/auth", authRouter);
 app.use("/weight", weightRouter);
 
 /**
- * Proper routing for production/development
- */
-if (process.env.NODE_ENV === "production") {
-  app.use("/", express.static(path.join(__dirname, "../build")));
-  app.get("/", (req, res) => {
-    return res
-      .status(200)
-      .sendFile(path.join(__dirname, "../build/index.html"));
-  });
-  app.get("/*", (req, res) => {
-    return res.status(200).redirect("/");
-  });
-}
-
-/**
  * Handle faulty requests
  */
 app.use((req, res) => res.sendStatus(404));
