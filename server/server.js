@@ -1,4 +1,4 @@
-const PORT = 3000;
+const PORT = 10000;
 const express = require("express");
 const path = require("path");
 const authRouter = require("./routes/authRouter");
