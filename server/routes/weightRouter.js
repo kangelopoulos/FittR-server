@@ -28,12 +28,26 @@ router.get('/',
 
 /**
  * Delete weight route
- * req.body - user_id (number), [ weight_ids (numbers) ]
+ * req.body - user_id (number), weight_id (number)
  * middleware -
  * res.locals - n/a
  */
-router.delete('/', (req, res) => {
-  return res.send(res.locals);
+router.delete('/', 
+  weightController.deleteWeight,
+  (req, res) => {
+    return res.send(res.locals);
+});
+
+/**
+ * Delete weight route
+ * req.body - user_id (number)
+ * middleware -
+ * res.locals - n/a
+ */
+router.delete('/all', 
+  weightController.deleteAllWeights,
+  (req, res) => {
+    return res.send(res.locals);
 });
 
 /**
@@ -42,8 +56,10 @@ router.delete('/', (req, res) => {
  * middleware -
  * res.locals - 
  */
-router.patch('/', (req, res) => {
-  return res.send(res.locals);
+router.patch('/', 
+  weightController.updateWeight,
+  (req, res) => {
+    return res.send(res.locals);
 });
 
 
