@@ -3,43 +3,36 @@ const router = express.Router();
 const authController = require("../controllers/authController");
 
 /**
- * Login route - post request for security purposes
- * req.body - email (str), password (str)
- * middleware - authController.login
- * res.locals - display name (str), username (str)
+ * User login route
  */
 router.post("/login", authController.login, (req, res) => {
   return res.status(200).send(res.locals);
 });
 
 /**
- * Sign up route
- * req.body - email (str), password (str), display_name (str, optional)
- * middleware - authController.signUp
- * res.locals - display name (str), username (str)
+ * User sign up route
  */
 router.post("/signup", authController.signUp, (req, res) => {
   return res.status(200).send(res.locals);
 });
 
 /**
- * Update user route
- * req.body - email (str), password (str), display_name (str, optional), user_id (number)
- * middleware -
- * res.locals - n/a
+ * Route for authorization
  */
-router.patch("/", (req, res) => {
-  return res.send(res.locals);
+router.get("/cookie", 
+  authController.authorization,
+  (req, res) => {
+    return res.status(200).send(res.locals);
 });
 
 /**
- * Update user route
- * req.body - user_id
- * middleware -
- * res.locals - n/a
+ * Route for deletion of authorization jwt
  */
-router.delete("/", (req, res) => {
-  return res.send(res.locals);
+router.delete("/cookie", 
+  authController.destroyToken,
+  (req, res) => {
+    return res.status(200).send(res.locals);
 });
+
 
 module.exports = router;

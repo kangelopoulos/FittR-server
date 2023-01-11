@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const authRouter = require("./routes/authRouter");
 const weightRouter = require("./routes/weightRouter");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -11,6 +12,7 @@ const app = express();
  */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cookieParser());
 
 /**
  * Routes
@@ -18,6 +20,9 @@ app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/weight", weightRouter);
 
+/**
+ * Proper routing for production/development
+ */
 if (process.env.NODE_ENV === "production") {
   app.use("/", express.static(path.join(__dirname, "../build")));
   app.get("/", (req, res) => {

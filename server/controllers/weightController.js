@@ -1,6 +1,9 @@
 const db = require("../models/postgres");
 const weightController = {};
 
+/**
+ * Posts a weight for a user
+ */
 weightController.postWeight = async (req, res, next) => {
   const { weight, user_id, date } = req.body;
   let formattedWeight;
@@ -28,6 +31,9 @@ weightController.postWeight = async (req, res, next) => {
   }
 };
 
+/**
+ * Gets all user weights
+ */
 weightController.getWeights = async (req, res, next) => {
   const { user_id } = req.query;
   try {
@@ -51,6 +57,9 @@ weightController.getWeights = async (req, res, next) => {
   }
 };
 
+/**
+ * Updates a specific user weight based on the weights _id
+ */
 weightController.updateWeight = async (req, res, next) => {
   const { weight_id, date, weight } = req.body;
   console.log(req.body);
@@ -72,6 +81,9 @@ weightController.updateWeight = async (req, res, next) => {
   }
 };
 
+/**
+ * Deletes a user weight based on a weight _id
+ */
 weightController.deleteWeight = async (req, res, next) => {
   const { weight_id } = req.body;
   console.log(weight_id);
@@ -85,13 +97,16 @@ weightController.deleteWeight = async (req, res, next) => {
     return next();
   } catch (err) {
     return next({
-      log: `Error in weightController.updateWeight: ${err}`,
+      log: `Error in weightController.deleteWeight: ${err}`,
       status: 500,
-      message: "Cannot update weights right now, please try again.",
+      message: "Cannot delete a weight right now, please try again.",
     });
   }
 };
 
+/**
+ * Deletes all weights for a user _id
+ */
 weightController.deleteAllWeights = async (req, res, next) => {
   const { user_id } = req.body;
   try {
@@ -104,9 +119,9 @@ weightController.deleteAllWeights = async (req, res, next) => {
     return next();
   } catch (err) {
     return next({
-      log: `Error in weightController.updateWeight: ${err}`,
+      log: `Error in weightController.deleteAllWeights: ${err}`,
       status: 500,
-      message: "Cannot update weights right now, please try again.",
+      message: "Cannot delete all weights right now, please try again.",
     });
   }
 };

@@ -14,7 +14,7 @@ const Table = ({ weights, deleteWeight, updateWeight }) => {
           </tr>
         </thead>
         <tbody>
-          {weights.map((weight, i) => {
+          { weights.length ? weights.map((weight, i) => {
             return (
               <Weight
                 weight={weight}
@@ -24,13 +24,13 @@ const Table = ({ weights, deleteWeight, updateWeight }) => {
                 updateWeight={updateWeight}
               />
             );
-          })}
+          }) : <></>}
         </tbody>
         <tfoot>
           <tr>
             <td>Total Weight Change:</td>
             <td>
-              {weights[weights.length - 1].weight - weights[0].weight} lbs
+              { weights.length ? weights[weights.length - 1].weight - weights[0].weight : 'N/A'} lbs
             </td>
           </tr>
         </tfoot>

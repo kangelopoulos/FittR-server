@@ -1,10 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Nav = ({ hasSession, setHasSession, setUser }) => {
-  const handleLogout = () => {
+
+  const handleLogout = async () => {
     setUser({});
     setHasSession(false);
+    const response = axios.delete('/auth/cookie', {
+      withCredentials: true
+    });
   };
 
   return (

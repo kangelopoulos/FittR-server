@@ -71,7 +71,8 @@ const Home = ({ user }) => {
       const response = await axios.delete("/weight", {
         data: { weight_id: weight_id },
       });
-      setWeights([...weights.filter((weight) => weight._id !== weight_id)]);
+      console.log([weights.filter(weight => weight._id == weight_id)])
+      setWeights([...weights.filter((weight) => weight._id != weight_id)]);
       setMsg("");
     } catch (err) {
       setMsg("There was an error, please try again");
