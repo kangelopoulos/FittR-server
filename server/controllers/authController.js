@@ -26,7 +26,7 @@ authController.signUp = async (req, res, next) => {
     return next({
       log: `Error in authController.signUp: ${err}`,
       status: 500,
-      message: 'Error on user sign up.',
+      message: 'Sign up failed, please try again.',
     });
   }
 }
@@ -36,12 +36,11 @@ authController.signUp = async (req, res, next) => {
  */
  authController.login = async (req, res, next) => {
   const { email, password } = req.body;
-  const today = new Date().toDateString();
-  console.log(today);
   try {
     const q = `SELECT * FROM users WHERE email = '${email}';`;
     const { rows } = await db.query(q);
     if (await bcrypt.compare(password, rows[0].password)) {
+      console.log(rows[0]);
       const user = {
         id: rows[0]._id,
         displayName: rows[0].display_name,
@@ -53,9 +52,9 @@ authController.signUp = async (req, res, next) => {
     }
   } catch (err) {
     return next({
-      log: `Error in userController.login: ${err}`,
+      log: `Error in authController.login: ${err}`,
       status: 500,
-      message: 'Cannot login user right now, sorry!',
+      message: 'Login failed, please try again.',
     });
   }
 };

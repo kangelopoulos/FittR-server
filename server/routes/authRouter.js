@@ -5,13 +5,13 @@ const authController = require('../controllers/authController');
 /**
  * Login route - post request for security purposes
  * req.body - email (str), password (str)
- * middleware - 
+ * middleware - authController.login
  * res.locals - display name (str), username (str)
  */
 router.post('/login', 
   authController.login,
   (req, res) => {
-    return res.send(res.locals);
+    return res.status(200).send(res.locals);
 });
 
 /**
