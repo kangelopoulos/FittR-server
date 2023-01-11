@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
 import Nav from "./components/Nav.jsx";
 import Login from "./containers/Login.jsx";
 import Home from "./containers/Home.jsx";
@@ -13,14 +13,30 @@ const App = () => {
 
   return (
     <div id="main">
-      <Nav />
+      <Nav
+        hasSession={hasSession}
+        setHasSession={setHasSession}
+        setUser={setUser}
+      />
       <Routes>
-        <Route path='/home' element={<Home user={user}/>}></Route>
-        <Route path='/' element={<Login setUser={setUser} hasSession={hasSession} setHasSession={setHasSession}/>}></Route>
-        <Route path='/register' element={<Register setUser={setUser} hasSession={hasSession}/>}></Route>
+        <Route path="/home" element={<Home user={user} />}></Route>
+        <Route
+          path="/"
+          element={
+            <Login
+              setUser={setUser}
+              hasSession={hasSession}
+              setHasSession={setHasSession}
+            />
+          }
+        ></Route>
+        <Route
+          path="/register"
+          element={<Register setUser={setUser} hasSession={hasSession} />}
+        ></Route>
       </Routes>
     </div>
-  )
-}
+  );
+};
 
 export default App;

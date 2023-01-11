@@ -1,7 +1,7 @@
 import React from "react";
+import Weight from "./Weight.jsx";
 
-
-const Table = ({ weights }) => {
+const Table = ({ weights, deleteWeight, updateWeight }) => {
   return (
     <div id="table">
       <table>
@@ -9,29 +9,34 @@ const Table = ({ weights }) => {
           <tr>
             <th>Date</th>
             <th>Weights</th>
+            <th>Update</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           {weights.map((weight, i) => {
             return (
-              <tr key={`${weight.number}_${i}`}>
-                <td>{weight.date}</td>
-                <td>{weight.weight}</td>
-                <td><button className="warning">Delete</button></td>
-              </tr>
-            )
+              <Weight
+                weight={weight}
+                i={i}
+                key={`id_${weight._id}`}
+                deleteWeight={deleteWeight}
+                updateWeight={updateWeight}
+              />
+            );
           })}
         </tbody>
         <tfoot>
           <tr>
             <td>Total Weight Change:</td>
-            <td>{weights[0].weight - weights[weights.length-1].weight} lbs</td>
+            <td>
+              {weights[weights.length - 1].weight - weights[0].weight} lbs
+            </td>
           </tr>
         </tfoot>
       </table>
     </div>
-  )
-}
+  );
+};
 
 export default Table;

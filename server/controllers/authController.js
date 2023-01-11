@@ -1,6 +1,6 @@
-const db = require('../models/postgres');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const db = require("../models/postgres");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const authController = {};
 
@@ -26,15 +26,15 @@ authController.signUp = async (req, res, next) => {
     return next({
       log: `Error in authController.signUp: ${err}`,
       status: 500,
-      message: 'Sign up failed, please try again.',
+      message: "Sign up failed, please try again.",
     });
   }
-}
+};
 
 /**
- * Log in controller 
+ * Log in controller
  */
- authController.login = async (req, res, next) => {
+authController.login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const q = `SELECT * FROM users WHERE email = '${email}';`;
@@ -54,7 +54,7 @@ authController.signUp = async (req, res, next) => {
     return next({
       log: `Error in authController.login: ${err}`,
       status: 500,
-      message: 'Login failed, please try again.',
+      message: "Login failed, please try again.",
     });
   }
 };

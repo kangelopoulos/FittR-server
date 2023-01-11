@@ -1,4 +1,4 @@
-@import './variable.scss';
+@import "./variable.scss";
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -14,7 +14,7 @@ nav {
   padding: 0px 30px 0px 100px;
   margin: 0px;
 
-  h1{
+  h1 {
     color: $blue;
     font-size: 40px;
     margin: 15px;
@@ -30,7 +30,7 @@ nav {
 .auth {
   background-color: $offWhite;
   padding: 50px;
-  border-radius: 5px; 
+  border-radius: 5px;
   border: 3px solid $yellow1;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
@@ -39,7 +39,7 @@ nav {
     font-family: $header-font;
     text-align: center;
   }
-  
+
   label {
     padding: 4px;
   }
@@ -47,7 +47,7 @@ nav {
   input {
     border: none;
     outline: 2px solid $yellow1;
-    &:focus{
+    &:focus {
       outline: 2px solid $yellow2;
     }
   }
@@ -58,8 +58,8 @@ nav {
 }
 
 .mid {
-  top: 50%; 
-  left: 50%; 
+  top: 50%;
+  left: 50%;
   position: fixed;
   transform: translate(-50%, -50%);
 }
@@ -69,4 +69,3 @@ nav {
   flex-direction: column;
   align-items: center;
 }
-

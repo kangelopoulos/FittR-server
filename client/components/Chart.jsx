@@ -9,7 +9,7 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
+} from "chart.js";
 
 /**
  * Register the chart
@@ -21,7 +21,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
+  Legend
 );
 
 /**
@@ -29,24 +29,27 @@ ChartJS.register(
  */
 const Chart = ({ weights }) => {
   const initialData = {
-    labels: weights.map(data => data.date).filter((date, idx, self) => self.indexOf(date) === idx),
+    labels: weights
+      .map((data) => data.date)
+      .filter((date, idx, self) => self.indexOf(date) === idx),
     datasets: [
       {
-        label: 'Weights',
-        data: weights.reduce((acc, cur) => {
-          console.log(acc, cur);
-          const found = acc.find(val => val.date == cur.date);
-          if(found){
-            found.weight += cur.weight;
-            found.count++;
-            return acc;
-          } else {
-            cur.count = 1;
-            return [...acc, {...cur}];
-          }
-        }, []).map(weight => (weight.weight/weight.count).toFixed(2)),
-        backgroundColor: '#ebecec',
-        borderColor: '#f4d35e'
+        label: "Weights",
+        data: weights
+          .reduce((acc, cur) => {
+            const found = acc.find((val) => val.date == cur.date);
+            if (found) {
+              found.weight += cur.weight;
+              found.count++;
+              return acc;
+            } else {
+              cur.count = 1;
+              return [...acc, { ...cur }];
+            }
+          }, [])
+          .map((weight) => (weight.weight / weight.count).toFixed(2)),
+        backgroundColor: "#ebecec",
+        borderColor: "#f4d35e",
       },
     ],
   };
@@ -59,7 +62,7 @@ const Chart = ({ weights }) => {
     <div id="chart">
       <Line className="line-chart-js" data={initialData} options={options} />
     </div>
-  )
-}
+  );
+};
 
 export default Chart;

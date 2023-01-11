@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const authController = require('../controllers/authController');
+const authController = require("../controllers/authController");
 
 /**
  * Login route - post request for security purposes
@@ -8,22 +8,18 @@ const authController = require('../controllers/authController');
  * middleware - authController.login
  * res.locals - display name (str), username (str)
  */
-router.post('/login', 
-  authController.login,
-  (req, res) => {
-    return res.status(200).send(res.locals);
+router.post("/login", authController.login, (req, res) => {
+  return res.status(200).send(res.locals);
 });
 
 /**
- * Sign up route 
+ * Sign up route
  * req.body - email (str), password (str), display_name (str, optional)
  * middleware - authController.signUp
  * res.locals - display name (str), username (str)
  */
-router.post('/signup', 
-  authController.signUp, 
-  (req, res) => {
-    return res.status(200).send(res.locals);
+router.post("/signup", authController.signUp, (req, res) => {
+  return res.status(200).send(res.locals);
 });
 
 /**
@@ -32,7 +28,7 @@ router.post('/signup',
  * middleware -
  * res.locals - n/a
  */
- router.patch('/', (req, res) => {
+router.patch("/", (req, res) => {
   return res.send(res.locals);
 });
 
@@ -42,7 +38,7 @@ router.post('/signup',
  * middleware -
  * res.locals - n/a
  */
- router.delete('/', (req, res) => {
+router.delete("/", (req, res) => {
   return res.send(res.locals);
 });
 

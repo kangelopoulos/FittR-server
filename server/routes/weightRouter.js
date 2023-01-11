@@ -1,17 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const weightController = require('../controllers/weightController');
+const weightController = require("../controllers/weightController");
 
 /**
- * Post weight 
+ * Post weight
  * req.body - weight (number), user_id (number), date (date)
- * middleware - 
+ * middleware -
  * res.locals - n/a
  */
-router.post('/', 
-  weightController.postWeight,
-  (req, res) => {
-    return res.send(res.locals);
+router.post("/", weightController.postWeight, (req, res) => {
+  return res.send(res.locals);
 });
 
 /**
@@ -20,10 +18,8 @@ router.post('/',
  * middleware -
  * res.locals - array of objs with keys weight (number), date (date/str), _id (number)
  */
-router.get('/', 
-  weightController.getWeights,
-  (req, res) => {
-    return res.send(res.locals);
+router.get("/", weightController.getWeights, (req, res) => {
+  return res.send(res.locals);
 });
 
 /**
@@ -32,10 +28,8 @@ router.get('/',
  * middleware -
  * res.locals - n/a
  */
-router.delete('/', 
-  weightController.deleteWeight,
-  (req, res) => {
-    return res.send(res.locals);
+router.delete("/", weightController.deleteWeight, (req, res) => {
+  return res.send(res.locals);
 });
 
 /**
@@ -44,23 +38,18 @@ router.delete('/',
  * middleware -
  * res.locals - n/a
  */
-router.delete('/all', 
-  weightController.deleteAllWeights,
-  (req, res) => {
-    return res.send(res.locals);
+router.delete("/all", weightController.deleteAllWeights, (req, res) => {
+  return res.send(res.locals);
 });
 
 /**
  * Update weight route
  * req.body - user_id (number), weight_id (number), weight (number)
  * middleware -
- * res.locals - 
+ * res.locals -
  */
-router.patch('/', 
-  weightController.updateWeight,
-  (req, res) => {
-    return res.send(res.locals);
+router.patch("/", weightController.updateWeight, (req, res) => {
+  return res.send(res.locals);
 });
-
 
 module.exports = router;
