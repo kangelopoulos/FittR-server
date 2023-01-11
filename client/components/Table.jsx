@@ -16,7 +16,7 @@ const Table = ({ weights }) => {
           {weights.map((weight, i) => {
             return (
               <tr key={`${weight.number}_${i}`}>
-                <td>{`${weight.date.getUTCMonth()+1}-${weight.date.getUTCDate()}-${weight.date.getUTCFullYear()}`}</td>
+                <td>{weight.date}</td>
                 <td>{weight.weight}</td>
                 <td><button className="warning">Delete</button></td>
               </tr>

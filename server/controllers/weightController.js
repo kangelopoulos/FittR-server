@@ -24,16 +24,13 @@ weightController.postWeight = async (req, res, next) => {
   }
 };
 
-/**
- * THIS IS WHERE I LEFT OFF - IM TRYING TO AVERAGE WEIGHTS ON EACH DAY, 
- * THE BELOW QUERY WILL NOT WORK (OBVIOUSLY)
- */
 weightController.getWeights = async (req, res, next) => {
   const { user_id } = req.query;
   try {
-    const q = `SELECT _id, 
-                  to_char(date, 'MM-DD-YYYY') as date, 
-                  AVG(weight) as weight
+    const q = `SELECT 
+                  date, 
+                  CAST(weight AS FLOAT) as weight, 
+                  _id
                 FROM user_weights 
                 WHERE user_id = $1 
                 ORDER BY date`;
