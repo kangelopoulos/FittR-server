@@ -27,7 +27,6 @@ authController.signUp = async (req, res, next) => {
       sameSite: "None",
       httpOnly: true,
       secure: true,
-      domain: "ksatest.dev"
     });
     res.locals = user;
     return next();
@@ -61,7 +60,6 @@ authController.login = async (req, res, next) => {
         sameSite: "None",
         httpOnly: true,
         secure: true, 
-        domain: "ksatest.dev"
       });
       res.locals = user;
       res.locals = user;
