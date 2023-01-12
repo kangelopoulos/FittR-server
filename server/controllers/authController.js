@@ -27,6 +27,7 @@ authController.signUp = async (req, res, next) => {
       sameSite: 'none',
       httpOnly: true,
       secure: true,
+      path: '/'
     });
     res.locals = user;
     return next();
@@ -60,6 +61,7 @@ authController.login = async (req, res, next) => {
         sameSite: 'none',
         httpOnly: true,
         secure: true, 
+        path: '/'
       });
       console.log(res.cookie);
       res.locals = user;
