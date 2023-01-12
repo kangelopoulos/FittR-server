@@ -60,7 +60,7 @@ authController.login = async (req, res, next) => {
         sameSite: "None",
         httpOnly: true,
         secure: true, 
-        domain: "fittr.onrender.com"
+        domain: "api-fittr.onrender.com"
       });
       res.locals = user;
       res.locals = user;
