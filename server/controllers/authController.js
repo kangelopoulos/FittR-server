@@ -25,7 +25,8 @@ authController.signUp = async (req, res, next) => {
     })
     res.cookie('token', accessToken, {
       sameSite: "None",
-      httpOnly: true
+      httpOnly: true,
+      secure: true
     });
     res.locals = user;
     return next();
@@ -57,7 +58,8 @@ authController.login = async (req, res, next) => {
       })
       res.cookie('token', accessToken, {
         sameSite: "None",
-        httpOnly: true
+        httpOnly: true,
+        secure: true
       });
       res.locals = user;
       res.locals = user;
@@ -119,7 +121,9 @@ authController.destroyToken = async (req, res, next) => {
       if(req.cookies.token){
         console.log('clearing', req.cookies.token)
         res.clearCookie('token', {
-          httpOnly: true
+          sameSite: "None",
+          httpOnly: true,
+          secure: true
         }).send();
       }
     }
