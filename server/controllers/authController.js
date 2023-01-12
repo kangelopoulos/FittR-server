@@ -80,6 +80,7 @@ authController.login = async (req, res, next) => {
  * Check for a cookie - if present, return user info 
  */
 authController.authorization = async (req,res,next) => {
+  console.log(req.headers.cookies);
   console.log(req);
   if(req.cookies){
     try {
