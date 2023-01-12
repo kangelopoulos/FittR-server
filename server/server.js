@@ -1,6 +1,5 @@
 const PORT = process.env.PORT;
 const express = require("express");
-const path = require("path");
 const authRouter = require("./routes/authRouter");
 const weightRouter = require("./routes/weightRouter");
 const cookieParser = require("cookie-parser");
