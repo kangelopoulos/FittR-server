@@ -7,7 +7,6 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 
-
 /**
  * Handle parsing request body
  */
@@ -15,14 +14,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-app.set('trust proxy', 1);
+app.set("trust proxy", 1);
 
 app.use((req, res, next) => {
-  const allowedDomains = ['https://ksatest.dev', 'https://fittr.onrender.com']
-  res.setHeader('Access-Control-Allow-Origin', 'https://ksatest.dev');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PATCH,DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader("Access-Control-Allow-Origin", "https://ksatest.dev");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,OPTIONS,POST,PATCH,DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   res.status(200);
   next();
 });

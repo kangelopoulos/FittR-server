@@ -15,19 +15,17 @@ authController.signUp = async (req, res, next) => {
     const q = `INSERT INTO users(email, password, display_name) VALUES ($1, $2, $3) RETURNING _id;`;
     const values = [email, hashedPass, displayName];
     const { rows } = await db.query(q, values);
-    console.log(rows);
     const user = {
       id: rows[0]._id,
       displayName: rows[0].display_name,
     };
     const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES_IN
-    })
-    res.cookie('token', accessToken, {
-      sameSite: 'none',
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    });
+    res.cookie("token", accessToken, {
+      sameSite: "none",
       httpOnly: true,
       secure: true,
-      path: '/'
     });
     res.locals = user;
     return next();
@@ -49,21 +47,18 @@ authController.login = async (req, res, next) => {
     const q = `SELECT * FROM users WHERE email = '${email}';`;
     const { rows } = await db.query(q);
     if (await bcrypt.compare(password, rows[0].password)) {
-      console.log(rows[0]);
       const user = {
         id: rows[0]._id,
         displayName: rows[0].display_name,
       };
       const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN
-      })
-      res.cookie('token', accessToken, {
-        sameSite: 'none',
-        httpOnly: true,
-        secure: true, 
-        path: '/'
+        expiresIn: process.env.JWT_EXPIRES_IN,
       });
-      console.log(res.cookie);
+      res.cookie("token", accessToken, {
+        sameSite: "none",
+        httpOnly: true,
+        secure: true,
+      });
       res.locals = user;
       return next();
     } else {
@@ -79,20 +74,17 @@ authController.login = async (req, res, next) => {
 };
 
 /**
- * Check for a cookie - if present, return user info 
+ * Check for a cookie - if present, return user info
  */
-authController.authorization = async (req,res,next) => {
-  console.log(req.headers.cookies);
-  console.log(req);
-  if(req.cookies){
+authController.authorization = async (req, res, next) => {
+  if (req.cookies) {
     try {
       const token = req.cookies.token;
-      if(token){
-        console.log(token);
+      if (token) {
         const data = jwt.verify(token, process.env.JWT_SECRET);
         const q = `SELECT * FROM users WHERE _id = ${data.id};`;
         const { rows } = await db.query(q);
-        if(rows[0]){
+        if (rows[0]) {
           const user = {
             id: rows[0]._id,
             displayName: rows[0].display_name,
@@ -103,7 +95,7 @@ authController.authorization = async (req,res,next) => {
         return res.status(403).send();
       }
       return next();
-    } catch(err) {
+    } catch (err) {
       return next({
         log: `Error in authController.authorization: ${err}`,
         status: 403,
@@ -111,24 +103,23 @@ authController.authorization = async (req,res,next) => {
       });
     }
   }
-  console.log('got here');
   return res.status(403).send();
-}
-
+};
 
 /**
  * Reassign the value of the jwt and expiration to be immediate
  */
 authController.destroyToken = async (req, res, next) => {
   try {
-    if(req.cookies){
-      if(req.cookies.token){
-        console.log('clearing', req.cookies.token)
-        res.clearCookie('token', {
-          sameSite: "None",
-          httpOnly: true,
-          secure: true
-        }).send();
+    if (req.cookies) {
+      if (req.cookies.token) {
+        res
+          .clearCookie("token", {
+            sameSite: "None",
+            httpOnly: true,
+            secure: true,
+          })
+          .send();
       }
     }
   } catch (err) {

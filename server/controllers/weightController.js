@@ -18,9 +18,7 @@ weightController.postWeight = async (req, res, next) => {
                   CAST(weight AS FLOAT) weight`;
     const vals = [user_id, date, formattedWeight];
     const { rows } = await db.query(q, vals);
-    console.log(rows[0]);
     res.locals = { ...rows[0] };
-    console.log(rows);
     return next();
   } catch (err) {
     return next({
@@ -62,7 +60,6 @@ weightController.getWeights = async (req, res, next) => {
  */
 weightController.updateWeight = async (req, res, next) => {
   const { weight_id, date, weight } = req.body;
-  console.log(req.body);
   try {
     const q = `UPDATE user_weights
                 SET weight = $1, 
@@ -70,7 +67,6 @@ weightController.updateWeight = async (req, res, next) => {
                 WHERE _id = $3`;
     const vals = [weight, date, weight_id];
     const rows = await db.query(q, vals);
-    console.log(rows);
     return next();
   } catch (err) {
     return next({
@@ -86,14 +82,12 @@ weightController.updateWeight = async (req, res, next) => {
  */
 weightController.deleteWeight = async (req, res, next) => {
   const { weight_id } = req.body;
-  console.log(weight_id);
   try {
     const q = `DELETE FROM user_weights 
                 WHERE _id = $1`;
     const vals = [weight_id];
     const rows = await db.query(q, vals);
     res.locals = rows;
-    console.log(rows);
     return next();
   } catch (err) {
     return next({
@@ -115,7 +109,6 @@ weightController.deleteAllWeights = async (req, res, next) => {
     const vals = [user_id];
     const { rows } = await db.query(q, vals);
     res.locals = rows;
-    console.log(rows);
     return next();
   } catch (err) {
     return next({

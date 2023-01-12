@@ -19,20 +19,15 @@ router.post("/signup", authController.signUp, (req, res) => {
 /**
  * Route for authorization
  */
-router.post("/cookie", 
-  authController.authorization,
-  (req, res) => {
-    return res.status(200).send(res.locals);
+router.post("/cookie", authController.authorization, (req, res) => {
+  return res.status(200).send(res.locals);
 });
 
 /**
  * Route for deletion of authorization jwt
  */
-router.delete("/cookie", 
-  authController.destroyToken,
-  (req, res) => {
-    return res.status(200).send(res.locals);
+router.delete("/cookie", authController.destroyToken, (req, res) => {
+  return res.status(200).send(res.locals);
 });
-
 
 module.exports = router;
