@@ -15,6 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
+app.set('trust proxy', true);
+
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://ksatest.dev');
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PATCH,DELETE');
@@ -23,6 +25,7 @@ app.use((req, res, next) => {
   res.status(200);
   next();
 });
+
 
 /**
  * Routes
