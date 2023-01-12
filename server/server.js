@@ -18,6 +18,7 @@ app.use(cookieParser());
 app.set('trust proxy', 1);
 
 app.use((req, res, next) => {
+  const allowedDomains = ['https://ksatest.dev', 'https://fittr.onrender.com']
   res.setHeader('Access-Control-Allow-Origin', 'https://ksatest.dev');
   res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PATCH,DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
@@ -25,7 +26,6 @@ app.use((req, res, next) => {
   res.status(200);
   next();
 });
-
 
 /**
  * Routes
