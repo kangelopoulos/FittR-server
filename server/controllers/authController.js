@@ -61,7 +61,7 @@ authController.login = async (req, res, next) => {
         httpOnly: true,
         secure: true, 
       });
-      res.locals = user;
+      console.log(res.cookie);
       res.locals = user;
       return next();
     } else {
