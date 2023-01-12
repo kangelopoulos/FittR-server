@@ -81,15 +81,23 @@ authController.authorization = async (req, res, next) => {
     try {
       const token = req.cookies.token;
       if (token) {
-        const data = jwt.verify(token, process.env.JWT_SECRET);
-        const q = `SELECT * FROM users WHERE _id = ${data.id};`;
-        const { rows } = await db.query(q);
-        if (rows[0]) {
-          const user = {
-            id: rows[0]._id,
-            displayName: rows[0].display_name,
-          };
-          res.locals = user;
+        try {
+          const data = jwt.verify(token, process.env.JWT_SECRET);
+          const q = `SELECT * FROM users WHERE _id = ${data.id};`;
+          const { rows } = await db.query(q);
+          if (rows[0]) {
+            const user = {
+              id: rows[0]._id,
+              displayName: rows[0].display_name,
+            };
+            res.locals = user;
+          }
+        } catch (err) {
+          return next({
+            log: `Error in authController.authorization: ${err}`,
+            status: 403,
+            message: "Not authorized.",
+          });
         }
       } else {
         return res.status(200).send();

@@ -66,7 +66,7 @@ weightController.updateWeight = async (req, res, next) => {
                     date = $2
                 WHERE _id = $3`;
     const vals = [weight, date, weight_id];
-    const rows = await db.query(q, vals);
+    const { rows } = await db.query(q, vals);
     return next();
   } catch (err) {
     return next({
