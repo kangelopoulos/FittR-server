@@ -59,7 +59,8 @@ authController.login = async (req, res, next) => {
       res.cookie('token', accessToken, {
         sameSite: "None",
         httpOnly: true,
-        secure: true
+        secure: true, 
+        domain: "fittr.onrender.com"
       });
       res.locals = user;
       res.locals = user;
