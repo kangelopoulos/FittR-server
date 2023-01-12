@@ -92,7 +92,7 @@ authController.authorization = async (req, res, next) => {
           res.locals = user;
         }
       } else {
-        return res.status(403).send();
+        return res.status(200).send();
       }
       return next();
     } catch (err) {
@@ -103,7 +103,7 @@ authController.authorization = async (req, res, next) => {
       });
     }
   }
-  return res.status(403).send();
+  return res.status(200).send();
 };
 
 /**
