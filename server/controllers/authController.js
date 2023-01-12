@@ -24,7 +24,7 @@ authController.signUp = async (req, res, next) => {
       expiresIn: process.env.JWT_EXPIRES_IN
     })
     res.cookie('token', accessToken, {
-      sameSite: "None",
+      sameSite: 'none',
       httpOnly: true,
       secure: true,
     });
@@ -57,7 +57,7 @@ authController.login = async (req, res, next) => {
         expiresIn: process.env.JWT_EXPIRES_IN
       })
       res.cookie('token', accessToken, {
-        sameSite: "None",
+        sameSite: 'none',
         httpOnly: true,
         secure: true, 
       });
