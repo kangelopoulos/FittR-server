@@ -80,7 +80,7 @@ authController.login = async (req, res, next) => {
  * Check for a cookie - if present, return user info 
  */
 authController.authorization = async (req,res,next) => {
-  console.log('in auth');
+  console.log(req.cookies);
   if(req.cookies){
     try {
       const token = req.cookies.token;
@@ -97,7 +97,8 @@ authController.authorization = async (req,res,next) => {
           res.locals = user;
         }
       } else {
-        return res.status(403);
+        res.status(403);
+        return next();
       }
       return next();
     } catch(err) {
