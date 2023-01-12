@@ -23,7 +23,10 @@ authController.signUp = async (req, res, next) => {
     const accessToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN
     })
-    res.cookie('token', accessToken);
+    res.cookie('token', accessToken, {
+      sameSite: "None",
+      httpOnly: true
+    });
     res.locals = user;
     return next();
   } catch (err) {
@@ -53,7 +56,8 @@ authController.login = async (req, res, next) => {
         expiresIn: process.env.JWT_EXPIRES_IN
       })
       res.cookie('token', accessToken, {
-        httpOnly: true,
+        sameSite: "None",
+        httpOnly: true
       });
       res.locals = user;
       res.locals = user;
