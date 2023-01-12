@@ -12,7 +12,7 @@ authController.signUp = async (req, res, next) => {
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPass = await bcrypt.hash(password, salt);
-    const q = `INSERT INTO users(email, password, display_name) VALUES ($1, $2, $3) RETURNING _id;`;
+    const q = `INSERT INTO users(email, password, display_name) VALUES ($1, $2, $3) RETURNING _id, display_name;`;
     const values = [email, hashedPass, displayName];
     const { rows } = await db.query(q, values);
     const user = {
